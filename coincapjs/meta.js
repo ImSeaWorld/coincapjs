@@ -1,5 +1,3 @@
-// pull this from assets call.
-//var Arr = []; data.data.forEach((item) => { Arr.push(item.id); });
 exports.CoinIDs = [
     'bitcoin',
     'ethereum',

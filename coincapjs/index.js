@@ -64,8 +64,8 @@ module.exports = (function () {
 
     // prettier-ignore
     CoinCap.prototype = {
-
         constructor: CoinCap,
+        
         _call: function (_interface, method, parameters, cb) {
 
             this.URLPath = '?';
