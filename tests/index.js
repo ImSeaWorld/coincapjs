@@ -2,7 +2,17 @@ var CoinCap = require('../coincapjs');
 
 var CoinCapAPI = new CoinCap();
 
-CoinCapAPI.getAssets.collection({}, function (err, status, res) {
+CoinCapAPI.getAssets.collection({}, function (err, status, result) {
+    if (err) throw err;
+
+    console.log(
+        `Data Length: ${result.dataLen}\nFirst Result: ${JSON.stringify(
+            result.data[0],
+        )}`,
+    );
+});
+
+/*CoinCapAPI.getAssets.collection({}, function (err, status, res) {
     if (err) {
         throw `${err}`;
     }
@@ -85,3 +95,4 @@ CoinCapAPI.getCandles.collection({}, function (err, status, res) {
 
     console.log(res);
 });
+*/
