@@ -117,27 +117,27 @@ exports.API = {
                     parameters: [
                         {
                             name: 'search',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'search by asset id (bitcoin) or symbol (BTC)',
                         },
                         {
                             name: 'ids',
-                            type: 'string', // bitcoin?
+                            type: String, // bitcoin?
                             optional: true,
                             description:
                                 'query with multiple ids=bitcoin,ethereum,monero',
                         },
                         {
                             name: 'limit',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'max limit of 2000',
                         },
                         {
                             name: 'offset',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'offset',
                         },
@@ -150,7 +150,7 @@ exports.API = {
                     parameters: [
                         {
                             name: 'id',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description: 'asset id',
                         },
@@ -163,27 +163,27 @@ exports.API = {
                     parameters: [
                         {
                             name: 'id',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description: 'asset id',
                         },
                         {
                             name: 'interval',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description:
                                 'point-in-time interval. minute and hour intervals represent price at that time, the day interval represents average of 24 hour periods (timezone: UTC)',
                         },
                         {
                             name: 'start',
-                            type: 'string', // date in unix timestamp
+                            type: String, // date in unix timestamp
                             optional: true,
                             description:
                                 'UNIX time in milliseconds. omiting will return the most recent asset history. If start is supplied, end is required and vice vera',
                         },
                         {
                             name: 'end',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'UNIX time in milliseconds. omiting will return the most recent asset history. If start is supplied, end is required and vice vera',
@@ -197,19 +197,19 @@ exports.API = {
                     parameters: [
                         {
                             name: 'id',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description: 'asset id',
                         },
                         {
                             name: 'limit',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'max limit of 2000',
                         },
                         {
                             name: 'offset',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'offset',
                         },
@@ -233,7 +233,7 @@ exports.API = {
                     parameters: [
                         {
                             name: 'id',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description: 'asset id',
                         },
@@ -257,7 +257,7 @@ exports.API = {
                     parameters: [
                         {
                             name: 'id',
-                            type: 'string',
+                            type: String,
                             optional: false,
                             description: 'asset id',
                         },
@@ -275,61 +275,111 @@ exports.API = {
                     parameters: [
                         {
                             name: 'exchangeId',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description: 'search by exchange id',
                         },
                         {
                             name: 'baseSymbol',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'returns all containing the base symbol',
                         },
                         {
                             name: 'quoteSymbol',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'returns all containing the quote symbol',
                         },
                         {
                             name: 'baseId',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description: 'returns all containing the base id',
                         },
                         {
                             name: 'quoteId',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description: 'returns all containing the quote id',
                         },
                         {
                             name: 'assetSymbol',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'returns all assets containing symbol (base and quote)',
                         },
                         {
                             name: 'assetId',
-                            type: 'string',
+                            type: String,
                             optional: true,
                             description:
                                 'returns all assets containing id (base and quote)',
                         },
                         {
                             name: 'limit',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'max limit of 2000',
                         },
                         {
                             name: 'offset',
-                            type: 'int',
+                            type: Number,
                             optional: true,
                             description: 'offset',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            name: 'candles',
+            methods: [
+                {
+                    name: '/',
+                    version: 2,
+                    httpmethod: 'GET',
+                    parameters: [
+                        {
+                            name: 'exchange',
+                            type: String,
+                            optional: false,
+                            description: 'exchange id',
+                        },
+                        {
+                            name: 'interval',
+                            type: String,
+                            optional: false,
+                            description: 'candle interval',
+                        },
+                        {
+                            name: 'baseId',
+                            type: String,
+                            optional: false,
+                            description: 'base id',
+                        },
+                        {
+                            name: 'quoteId',
+                            type: String,
+                            optional: false,
+                            description: 'quote id',
+                        },
+                        {
+                            name: 'start',
+                            type: Number,
+                            optional: true,
+                            description:
+                                'UNIX time in milliseconds. omiting will return the most recent candles',
+                        },
+                        {
+                            name: 'end',
+                            type: Number,
+                            optional: true,
+                            description:
+                                'UNIX time in milliseconds. omiting will return the most recent candles',
                         },
                     ],
                 },

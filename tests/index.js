@@ -4,7 +4,7 @@ var CoinCapAPI = new CoinCap();
 
 CoinCapAPI.getAssets.collection({}, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -12,7 +12,7 @@ CoinCapAPI.getAssets.collection({}, function (err, status, res) {
 
 CoinCapAPI.getAssets.byId({ id: 'bitcoin' }, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -22,7 +22,7 @@ CoinCapAPI.getAssets.byId({ id: 'bitcoin' }, function (err, status, res) {
 // prettier-ignore
 CoinCapAPI.getAssets.history({ id: 'bitcoin', interval: 'd1' }, function (err, status, res) {
     if (err) {
-        throw (`${status} | ${err}`);
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -30,7 +30,7 @@ CoinCapAPI.getAssets.history({ id: 'bitcoin', interval: 'd1' }, function (err, s
 
 CoinCapAPI.getAssets.markets({ id: 'bitcoin' }, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -38,7 +38,7 @@ CoinCapAPI.getAssets.markets({ id: 'bitcoin' }, function (err, status, res) {
 
 CoinCapAPI.getRates.collection({}, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -46,7 +46,7 @@ CoinCapAPI.getRates.collection({}, function (err, status, res) {
 
 CoinCapAPI.getRates.byId({ id: 'bitcoin' }, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -54,7 +54,7 @@ CoinCapAPI.getRates.byId({ id: 'bitcoin' }, function (err, status, res) {
 
 CoinCapAPI.getExchanges.collection({}, function (err, status, res) {
     if (err) {
-        throw `${status} | ${err}`;
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -63,7 +63,7 @@ CoinCapAPI.getExchanges.collection({}, function (err, status, res) {
 // prettier-ignore
 CoinCapAPI.getExchanges.byId({ id: 'bitcoin' }, function (err, status, res) {
     if (err) {
-        throw (`${status} | ${err}`);
+        throw `${err}`;
     }
 
     console.log(res.dataLen);
@@ -72,7 +72,15 @@ CoinCapAPI.getExchanges.byId({ id: 'bitcoin' }, function (err, status, res) {
 // prettier-ignore
 CoinCapAPI.getMarkets.collection({ exchangeId: 'quoine' }, function (err, status, res) {
     if (err) {
-        throw (`${status} | ${err}`);
+        throw `${err}`;
+    }
+
+    console.log(res);
+});
+
+CoinCapAPI.getCandles.collection({}, function (err, status, res) {
+    if (err) {
+        throw `${err}`;
     }
 
     console.log(res);

@@ -10,6 +10,58 @@ module.exports = (function () {
 
     function CoinCap() {}
 
+    Object.size = function (obj) {
+        var size = 0,
+            key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+
+    var ReturnKey = (n, h) => {
+        for (var a in h) {
+            for (var b in h[a]) {
+                if ((h[a][b] + '').indexOf(n) > -1) {
+                    return a;
+                }
+            }
+        }
+        return null;
+    };
+
+    var getJSON = (options, onResult) => {
+        let output = '';
+        const port = options.port == 443 ? https : http;
+        const req = port.request(options, (res) => {
+            if (options.encoding) {
+                res.setEncoding(options.encoding);
+            }
+
+            res.on('data', (chunk) => {
+                output += chunk;
+            });
+
+            res.on('end', () => {
+                let obj;
+
+                try {
+                    obj = JSON.parse(output);
+                } catch {
+                    obj = output;
+                }
+
+                onResult(undefined, res.statusCode, obj);
+            });
+        });
+
+        req.on('error', (err) => {
+            onResult(err);
+        });
+
+        req.end();
+    };
+
     // prettier-ignore
     CoinCap.prototype = {
 
@@ -25,7 +77,7 @@ module.exports = (function () {
 
                     if ( Object.size(apiMethod.parameters) < Object.size(parameters) ) {
                         return cb(
-                            'CoinCapJS Error: Too many parameters for this method.',
+                            `CoinCapJS Error: Too many parameters for method.`,
                         );
                     }
 
@@ -52,8 +104,7 @@ module.exports = (function () {
                             }=${parameters[apiMethod.parameters[param].name]}&`;
                         }
                     }
-
-                    // Catch the missing parameters
+                    
                     if (missingParams.length > 0) {
                         return cb(
                             `CoinCapJS Error: Missing "${missingParams.join(
@@ -65,8 +116,8 @@ module.exports = (function () {
                             } not optional.`,
                         );
                     }
-                } else return cb(`CoinCapJS Error: Method doesn't exist!`);
-            } else return cb(`CoinCapJS Error: Interface doesn't exist!`);
+                } else return cb(`CoinCapJS Error: Method "${method}" doesn't exist!`);
+            } else return cb(`CoinCapJS Error: Interface "${_interface}" doesn't exist!`);
 
             this.URLPath = `/${VERSION}/${_interface}/${ method === '/' ? '' : method }${ this.URLPath === '?' ? '' : this.URLPath }`;
             
@@ -157,58 +208,13 @@ module.exports = (function () {
                 return CoinCap.prototype._call('markets', '/', params, cb);
             },
         },
+
+        getCandles: {
+            collection: function (params, cb) {
+                return CoinCap.prototype._call('candles', '/', params, cb);
+            }
+        }
     };
 
     return CoinCap;
 })();
-
-Object.size = function (obj) {
-    var size = 0,
-        key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
-var ReturnKey = (n, h) => {
-    for (var a in h) {
-        for (var b in h[a]) {
-            if ((h[a][b] + '').indexOf(n) > -1) {
-                return a;
-            }
-        }
-    }
-    return null;
-};
-
-var getJSON = (options, onResult) => {
-    let output = '';
-    const port = options.port == 443 ? https : http;
-    const req = port.request(options, (res) => {
-        if (options.encoding) {
-            res.setEncoding(options.encoding);
-        }
-
-        res.on('data', (chunk) => {
-            output += chunk;
-        });
-
-        res.on('end', () => {
-            let obj; // = JSON.parse(output);
-            try {
-                obj = JSON.parse(output);
-            } catch {
-                obj = output;
-            }
-
-            onResult(undefined, res.statusCode, obj);
-        });
-    });
-
-    req.on('error', (err) => {
-        onResult(err);
-    });
-
-    req.end();
-};
