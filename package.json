@@ -1,6 +1,6 @@
 {
     "name": "coincapjs",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "API Wrapper for CoinCap",
     "main": "coincapjs/index.js",
     "scripts": {
