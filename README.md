@@ -1,8 +1,8 @@
 # coincapjs
 
-[![NPM](https://nodei.co/npm/coincapjs.png?compact=true)](https://nodei.co/npm/coincapjs/)
-
 ### Light weight, easy to use CoinCap api wrapper for NodeJS
+
+[![NPM](https://nodei.co/npm/coincapjs.png?compact=true)](https://nodei.co/npm/coincapjs/)
 
 ## Usage
 
