@@ -8,13 +8,12 @@ Install CoinCapJS with npm `npm install coincapjs --save`
 
 ```js
 const CoinCap = require('coincapjs');
-const CoinCapJS = new CoinCap();
 
-CoinCapJS.getAssets.collection({}, function (err, status, result) {
+CoinCap.getAssets.collection({}, function (err, status, result) {
     if (err) throw err;
 
     console.log(`Data Length: ${result.dataLen}`);
-    console.log(`First Result: ${JSON.parse( result.data[0] )}`);
+    console.log(`First Result: ${JSON.parse(result.data[0])}`);
 });
 ```
 
