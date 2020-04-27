@@ -13,11 +13,8 @@ const CoinCapJS = new CoinCap();
 CoinCapJS.getAssets.collection({}, function (err, status, result) {
     if (err) throw err;
 
-    console.log(
-        `Data Length: ${result.dataLen}\nFirst Result: ${JSON.parse(
-            result.data[0],
-        )}`,
-    );
+    console.log(`Data Length: ${result.dataLen}`);
+    console.log(`First Result: ${JSON.parse( result.data[0] )}`);
 });
 ```
 
@@ -57,4 +54,5 @@ CoinCapJS.getAssets.collection({}, function (err, status, result) {
 -   [`collection(Object: params, function: cb)`](https://docs.coincap.io/?version=latest#51da64d7-b83b-4fac-824f-3f06b6c8d944)
 
 [CoinCap.io](https://coincap.io/)
+
 [CoinCap.io API Docs](https://docs.coincap.io/)
