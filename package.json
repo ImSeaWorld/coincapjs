@@ -13,7 +13,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "something"
+        "url": "https://github.com/ImSeaWorld/coincapjs"
     },
     "keywords": [
         "bitcoin",
