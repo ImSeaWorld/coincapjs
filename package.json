@@ -7,5 +7,21 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Robert Klitsch",
-    "license": "ISC"
+    "license": "ISC",
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "something"
+    },
+    "keywords": [
+        "bitcoin",
+        "coincap",
+        "api",
+        "nodejs",
+        "wrapper",
+        "crypto",
+        "cryptocurrency"
+    ]
 }
