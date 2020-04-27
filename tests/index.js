@@ -1,8 +1,6 @@
 var CoinCap = require('../coincapjs');
 
-var CoinCapAPI = new CoinCap();
-
-CoinCapAPI.getAssets.collection({}, function (err, status, result) {
+CoinCap.getAssets.collection({}, function (err, status, result) {
     if (err) throw err;
 
     console.log(
