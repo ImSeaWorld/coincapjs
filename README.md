@@ -1,10 +1,10 @@
 # coincapjs
 
+[![NPM](https://nodei.co/npm/coincapjs.png?compact=true)](https://nodei.co/npm/coincapjs/)
+
 ### Light weight, easy to use CoinCap api wrapper for NodeJS
 
 ## Usage
-
-Install CoinCapJS with npm `npm install coincapjs --save`
 
 ```js
 const CoinCap = require('coincapjs');
