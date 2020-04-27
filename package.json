@@ -4,7 +4,7 @@
     "description": "API Wrapper for CoinCap",
     "main": "coincapjs/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"No test specified\""
     },
     "author": "Robert Klitsch",
     "license": "ISC",
