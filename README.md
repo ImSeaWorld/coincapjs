@@ -2,7 +2,7 @@
 
 ### Light weight, easy to use CoinCap api wrapper for NodeJS
 
-[![NPM](https://nodei.co/npm/coincapjs.png?compact=true)](https://nodei.co/npm/coincapjs/)
+[![NPM](https://nodei.co/npm/coincapjs.png)](https://nodei.co/npm/coincapjs/)
 
 ## Usage
 
@@ -14,6 +14,13 @@ CoinCap.getAssets.collection({}, function (err, status, result) {
 
     console.log(`Data Length: ${result.dataLen}`);
     console.log(`First Result: ${JSON.parse(result.data[0])}`);
+});
+
+// Detect missing parameters before call is made.
+// This will only care about required parameters specified
+CoinCap.getAssets.byId({}, function (err, status, result) {
+    if (err) throw err;
+    // Throws Error: "CoinCapJS Error: Missing "id" parameter! It's not optional."
 });
 ```
 
@@ -51,6 +58,10 @@ CoinCap.getAssets.collection({}, function (err, status, result) {
 ### Interface `CoinCap.getCandles`
 
 -   [`collection(Object: params, function: cb)`](https://docs.coincap.io/?version=latest#51da64d7-b83b-4fac-824f-3f06b6c8d944)
+
+---
+
+# Links
 
 [CoinCap.io](https://coincap.io/)
 
