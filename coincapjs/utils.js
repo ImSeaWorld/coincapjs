@@ -3,9 +3,8 @@ const https = require('https');
 
 module.exports = {
     objSize: function (obj) {
-        var size = 0,
-            key;
-        for (key in obj) {
+        var size = 0;
+        for (var key in obj) {
             if (obj.hasOwnProperty(key)) size++;
         }
         return size;

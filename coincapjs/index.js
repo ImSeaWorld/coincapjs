@@ -1,5 +1,5 @@
 const utils = require('./utils');
-const API = require('./meta');
+const { API } = require('./meta');
 
 const ENDPOINT = 'api.coincap.io';
 const VERSION = 'v2';
