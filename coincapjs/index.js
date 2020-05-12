@@ -1,5 +1,5 @@
 const utils = require('./utils');
-const { API, CoinIDs } = require('./meta');
+const API = require('./meta');
 
 const ENDPOINT = 'api.coincap.io';
 const VERSION = 'v2';
@@ -63,15 +63,10 @@ var CoinCap = {
         
         if (this.URLPath.indexOf('{{id}}') > -1) {
             if (parameters.id) {
-                if (CoinIDs.indexOf(parameters.id) > -1) {
-                    this.URLPath = this.URLPath.replace(
-                        '{{id}}',
-                        parameters.id,
-                    );
-                } else
-                    return cb(
-                        `Unknown ID. Please check your spelling: "${parameters.id}"`,
-                    );
+                this.URLPath = this.URLPath.replace(
+                    '{{id}}',
+                    parameters.id,
+                );
             } else return cb(`ID not provided but requested.`);
         }
 
