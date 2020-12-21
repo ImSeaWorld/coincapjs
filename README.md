@@ -57,6 +57,23 @@ CoinCap.getAssets({
 
 ---
 
+# Changes
+
+### `1.0.3` >> `1.0.5`
+
+-   Changed around prototypes to match hierarchy.
+-   Deprecated `collection(Object: params, function: cb)`
+    -   Interfaces now do the same job as `collection` did.
+
+```js
+// OLD
+CoinCap.getAssets.collection({}, function (err, status, result) {});
+// CURRENT
+CoinCap.getAssets({ cb: function (err, status, result) {} });
+```
+
+---
+
 # Examples
 
 ### TL;DR `CoinCap.call`
