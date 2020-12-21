@@ -21,6 +21,28 @@ module.exports = {
         return null;
     },
 
+    mto: (v, i, e = '') => {
+        return v.length > 1 ? i : e;
+    },
+
+    returnProperty: (a, k, d) => {
+        try {
+            return a[k] || d;
+        } catch {
+            return d;
+        }
+    },
+
+    excludeProperty: (a, k) => {
+        var o = {};
+        if (!a) return o;
+        for (var i in a) {
+            if (i === k) continue;
+            o[i] = a[i];
+        }
+        return o;
+    },
+
     getJSON: (options, onResult) => {
         let output = '';
         const port = options.port == 443 ? https : http;

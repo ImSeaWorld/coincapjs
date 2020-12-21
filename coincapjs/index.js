@@ -6,16 +6,19 @@ const VERSION = 'v2';
 
 // prettier-ignore
 var CoinCap = {
-    _call: function (_interface, method, parameters, cb) {
+    meta: API,
+    call: function (_interface, method, parameters, cb) {
 
         this.URLPath = '?';
+
+        if (!parameters) parameters = {};
 
         if ((this.interface_key = utils.ReturnKey(_interface, API.interfaces))) {
             if ((this.methods_key = utils.ReturnKey(method, API.interfaces[ this.interface_key ].methods))) {
                 var apiMethod =
                     API.interfaces[ this.interface_key ].methods[ this.methods_key ];
 
-                if ( utils.objSize(apiMethod.parameters) < utils.objSize(parameters) ) {
+                if (utils.objSize(apiMethod.parameters) < utils.objSize(parameters)) {
                     return cb(
                         `CoinCapJS Error: Too many parameters for method.`,
                     );
@@ -50,9 +53,9 @@ var CoinCap = {
                         `CoinCapJS Error: Missing "${missingParams.join(
                             '", "',
                         )}" parameter${
-                            missingParams.length > 1 ? 's' : ''
+                            utils.mto(missingParams, 's')
                         }! ${
-                            missingParams.length > 1 ? "They're" : "It's"
+                            utils.mto(missingParams, "They're", "It's")
                         } not optional.`,
                     );
                 }
@@ -67,7 +70,7 @@ var CoinCap = {
                     '{{id}}',
                     parameters.id,
                 );
-            } else return cb(`ID not provided but requested.`);
+            } else return cb(`ID not provided but required.`);
         }
 
         utils.getJSON(
@@ -85,69 +88,101 @@ var CoinCap = {
         );
     },
 
-    getAssets: {
-        collection: function (params, cb) {
-            return CoinCap._call('assets', '/', params, cb);
-        },
+    getAssets(op = null) {
+        var cb = utils.returnProperty(op, 'cb', false);
+        var params = utils.excludeProperty(op, 'cb');
+        
+        var prototypes = {
+            byId: function (id, cb = false) {
+                if (cb) {
+                    return CoinCap.call(
+                        'assets', 
+                        '{{id}}', 
+                        {id: id, ...params}, 
+                        cb
+                    );
+                } else {
+                    return {
+                        history: function (cb) {
+                            return CoinCap.call(
+                                'assets',
+                                '{{id}}/history',
+                                {id: id, ...params},
+                                cb,
+                            );
+                        },
+            
+                        markets: function (cb) {
+                            return CoinCap.call(
+                                'assets',
+                                '{{id}}/markets',
+                                {id: id, ...params},
+                                cb,
+                            );
+                        },
+                    };
+                }
+            },
+        };
 
-        byId: function (params, cb) {
-            return CoinCap._call('assets', '{{id}}', params, cb);
-        },
-
-        history: function (params, cb) {
-            return CoinCap._call(
-                'assets',
-                '{{id}}/history',
-                params,
-                cb,
-            );
-        },
-
-        markets: function (params, cb) {
-            return CoinCap._call(
-                'assets',
-                '{{id}}/markets',
-                params,
-                cb,
-            );
-        },
-    },
-
-    getRates: {
-        collection: function (params, cb) {
-            return CoinCap._call('rates', '/', params, cb);
-        },
-
-        byId: function (params, cb) {
-            return CoinCap._call('rates', '{{id}}', params, cb);
-        },
-    },
-
-    getExchanges: {
-        collection: function (params, cb) {
-            return CoinCap._call('exchanges', '/', params, cb);
-        },
-
-        byId: function (params, cb) {
-            return CoinCap._call(
-                'exchanges',
-                '{{id}}',
-                params,
-                cb,
-            );
-        },
-    },
-
-    getMarkets: {
-        collection: function (params, cb) {
-            return CoinCap._call('markets', '/', params, cb);
-        },
-    },
-
-    getCandles: {
-        collection: function (params, cb) {
-            return CoinCap._call('candles', '/', params, cb);
+        if (cb) {
+            return CoinCap.call('assets', '/', params, cb);
+        } else {
+            return { ...prototypes };
         }
+    },
+
+    getRates(op = null) {
+        var cb = utils.returnProperty(op, 'cb', false);
+        var params = utils.excludeProperty(op, 'cb');
+
+        var prototypes = {
+            byId: function (id, cb) {
+                return CoinCap.call('rates', '{{id}}', {id: id, ...params}, cb);
+            },
+        };
+
+        if (cb) {
+            return CoinCap.call('rates', '/', params, cb);
+        } else {
+            return { ...prototypes };
+        }
+    },
+
+    getExchanges(op = null) {
+        var cb = utils.returnProperty(op, 'cb', false);
+        var params = utils.excludeProperty(op, 'cb');
+
+        var prototypes = {
+            byId: function (id, cb) {
+                return CoinCap.call(
+                    'exchanges',
+                    '{{id}}',
+                    { id: id, ...params },
+                    cb,
+                );
+            },
+        };
+
+        if (cb) {
+            return CoinCap.call('exchanges', '/', params, cb);
+        } else {
+            return { ...prototypes };
+        }
+    },
+
+    getMarkets(op = null) {
+        var cb = utils.returnProperty(op, 'cb', false);
+        var params = utils.excludeProperty(op, 'cb');
+
+        return CoinCap.call('markets', '/', params, cb);
+    },
+
+    getCandles(op = null) {
+        var cb = utils.returnProperty(op, 'cb', false);
+        var params = utils.excludeProperty(op, 'cb');
+
+        return CoinCap.call('candles', '/', params, cb);
     }
 };
 
