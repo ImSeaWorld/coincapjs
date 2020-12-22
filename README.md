@@ -34,8 +34,8 @@ CoinCap.getAssets({
 
 -   [`CoinCap.getAssets({ ...params?, function: cb? })`](https://docs.coincap.io/?version=latest#89deffa0-ab03-4e0a-8d92-637a857d2c91)
     -   [`byId(String: id, function: cb?)`](https://docs.coincap.io/?version=latest#f8869879-171f-4240-adfd-dd2947506adc)
-        -   [`byId(String: id).history(function: cb)`](https://docs.coincap.io/?version=latest#61e708a8-8876-4fb2-a418-86f12f308978)
-        -   [`byId(String: id).markets(function: cb)`](https://docs.coincap.io/?version=latest#7f727b78-5013-41ec-aa1c-351b836458d0)
+        -   [`history(function: cb)`](https://docs.coincap.io/?version=latest#61e708a8-8876-4fb2-a418-86f12f308978)
+        -   [`markets(function: cb)`](https://docs.coincap.io/?version=latest#7f727b78-5013-41ec-aa1c-351b836458d0)
 
 ### Interface `CoinCap.getRates`
 
@@ -167,22 +167,15 @@ CoinCap.getRates().byId('bitcoin', function (err, status, res) {
 ### Interface `CoinCap.getExchanges`
 
 ```js
-CoinCap.getRates({
-    cb: function (err, status, res) {
-        if (err) {
-            throw err;
-        }
-
-        console.log(`CoinCap.getRates[${status}]:`, res.dataLen);
-    },
-});
-
-CoinCap.getRates().byId('bitcoin', function (err, status, res) {
+CoinCap.getExchanges().byId('bitcoin', function (err, status, res) {
     if (err) {
         throw err;
     }
 
-    console.log(`CoinCap.getRates().byId('bitcoin')[${status}]:`, res.dataLen);
+    console.log(
+        `CoinCap.getExchanges().byId('bitcoin')[${status}]:`,
+        res.dataLen,
+    );
 });
 ```
 
@@ -204,7 +197,7 @@ CoinCap.getMarkets({
 });
 ```
 
-### Interface `CoinCap.getMarkets`
+### Interface `CoinCap.getCandles`
 
 ```js
 CoinCap.getCandles({
